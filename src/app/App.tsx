@@ -15,10 +15,10 @@ import { Menu } from '@mui/icons-material';
 import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar'
 
 type PropsType = {
-    demo?: boolean
+    demo?: boolean;
 }
 
-function App({demo = false}: PropsType) {
+const App=({demo = false}: PropsType)=> {
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     return (
         <div className="App">
