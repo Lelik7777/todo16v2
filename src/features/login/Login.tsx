@@ -25,7 +25,7 @@ export const Login = () => {
             password: '',
             rememberMe: false,
         },
-       /* validate: (values) => {
+        validate: (values) => {
             const errors: Partial<Omit<LoginParamsType,'captcha'>> = {};
             if (!values.email) {
                 errors.email = 'Required';
@@ -38,14 +38,14 @@ export const Login = () => {
                 errors.password = 'password must be more then 2 characters';
             }
             return errors;
-        },*/
-         validationSchema: Yup.object({
+        },
+        /* validationSchema: Yup.object({
 
              password: Yup.string()
                  .min(3, 'Must be 3 characters or more')
                  .required('Required'),
              email: Yup.string().email('Invalid email address').required('Required'),
-         }),
+         }),*/
         onSubmit: values => {
             // alert(JSON.stringify(values, null, 2));
             dispatch(setLogin(values));
@@ -67,7 +67,8 @@ export const Login = () => {
                         <p>Email: free@samuraijs.com</p>
                         <p>Password: free</p>
                     </FormLabel>
-                    <FormGroup>
+
+                     <FormGroup>
                         <TextField label="Email" margin="normal"
                                    {...formik.getFieldProps('email')}
                         />

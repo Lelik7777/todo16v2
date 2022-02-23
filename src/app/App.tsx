@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './App.css'
 import {TodolistsList} from '../features/TodolistsList/TodolistsList'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from './store'
 import {RequestStatusType} from './app-reducer'
 import AppBar from '@mui/material/AppBar';
@@ -15,13 +15,30 @@ import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
 import {Login} from '../features/login/Login';
 import {Navigate, Route, Routes} from 'react-router-dom';
+import {getAuthMe, setLoguot} from '../features/login/loginReducer';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 type PropsType = {
     demo?: boolean;
 }
 
 const App = ({demo = false}: PropsType) => {
+    const dispatch = useDispatch();
+    const isAuth = useSelector<AppRootStateType, boolean>((state) => state.login.isAuth);
+    const initialized = useSelector<AppRootStateType, boolean>((state) => state.app.initialized);
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
+    useEffect(() => {
+        dispatch(getAuthMe())
+    }, []);
+    const handleLogout = () => {
+        dispatch(setLoguot());
+    }
+    if (!initialized) return (
+        <Box sx={{display: 'flex'}}>
+            <CircularProgress/>
+        </Box>
+    );
     return (
         <div className="App">
             <ErrorSnackbar/>
@@ -33,7 +50,7 @@ const App = ({demo = false}: PropsType) => {
                     <Typography variant="h6">
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {isAuth && <Button color="inherit" onClick={handleLogout}>Logout</Button>}
                 </Toolbar>
                 {status === 'loading' && <LinearProgress/>}
             </AppBar>
