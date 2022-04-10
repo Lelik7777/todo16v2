@@ -22,15 +22,15 @@ type PropsType = {
     demo?: boolean
 }
 
-export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
+export const TodolistsList: React.FC<PropsType> = ({}) => {
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch()
     const isAuth = useSelector<AppRootStateType, boolean>((state) => state.login.isAuth);
-    debugger
+
     useEffect(() => {
-        debugger
-        if (demo||!isAuth) {
+
+        if ( !isAuth) {
             return;
         }
         const thunk = fetchTodolistsTC()
@@ -77,7 +77,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         dispatch(thunk)
     }, [dispatch])
 
-if(!isAuth) return <Navigate to={'/login'}/>
+    if (!isAuth) return <Navigate to={'/login'}/>
     return <>
         <Grid container style={{padding: '20px'}}>
             <AddItemForm addItem={addTodolist}/>
@@ -99,7 +99,7 @@ if(!isAuth) return <Navigate to={'/login'}/>
                                 removeTodolist={removeTodolist}
                                 changeTaskTitle={changeTaskTitle}
                                 changeTodolistTitle={changeTodolistTitle}
-                                demo={demo}
+
                             />
                         </Paper>
                     </Grid>

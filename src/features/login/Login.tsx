@@ -7,8 +7,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {FormikErrors, useFormik} from 'formik';
-import * as Yup from 'yup';
+import {useFormik} from 'formik';
 import {useDispatch, useSelector} from 'react-redux';
 import {setLogin} from './loginReducer';
 import {LoginParamsType} from '../../api/todolists-api';
@@ -64,8 +63,8 @@ export const Login = () => {
                             </a>
                         </p>
                         <p>or use common test account credentials:</p>
-                        <p>Email: free@samuraijs.com</p>
-                        <p>Password: free</p>
+                        <p>Email:  lelik21212121@gmail.com</p>
+                        <p>Password: enter_free</p>
                     </FormLabel>
 
                      <FormGroup>
